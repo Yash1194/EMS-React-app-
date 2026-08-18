@@ -38,7 +38,7 @@ const login = ({handleLogin}) => {
                 setPassword(e.target.value)
               }}
               className='m-3 px-6 py-3 border-2 border-gray-400 rounded-2xl text-xl text-center outline-none bg-transparent placeholder:text-gray-400' type="password" placeholder="Enter your password" />
-              <button className='m-3 px-8 py-3 bg-blue-500 text-white rounded-2xl' type="submit">Login</button>
+              <button className='m-3 px-8 py-3 bg-blue-500 text-white rounded-2xl active:scale-95' type="submit" >Login</button>
             </form>
         </div>
     </div>
