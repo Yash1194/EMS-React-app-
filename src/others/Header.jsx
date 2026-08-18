@@ -1,9 +1,10 @@
 import React from 'react'
 
-const Header = () => {
+const Header = (props) => {
 const logOutUser = ()=>{
   localStorage.removeItem("loggedInUser")
-  window.location.reload()
+  props.changeUser('')
+  // window.location.reload()
 }
   return (
     <div className=' '>

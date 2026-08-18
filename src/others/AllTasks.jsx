@@ -19,13 +19,13 @@ const AllTasks = () => {
       {/* Employee List */}
       <div className="h-[75%]  overflow-y-auto">
 
-        {authData?.employees?.map((elem) => {
+        {authData?.employees?.map((elem, idx) => {
           return (
             <div
-              key={elem.id}
+              key={idx}
               className="py-3 px-3 grid grid-cols-5 items-center border-2 border-emerald-500 rounded-lg bg-transparent mt-2"
             >
-              
+
               {/* Name */}
               <h2 className="text-white font-bold ">
                 {elem.firstName}
