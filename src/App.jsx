@@ -12,7 +12,7 @@ import { useContext } from "react";
 
 const App = () => {
 
-  const authData = useContext(AuthContext)
+  const [userData,setUserData] = useContext(AuthContext)
   const [user, setUser] = useState(null)
   const [loggedInUserData, setLoggedInUserData] = useState(null)
 
@@ -34,31 +34,35 @@ const App = () => {
 
 
 
+const handleLogin = (email, password) => {
+  if (email === "admin@me.com" && password === "123") {
+    setUser("admin");
 
-  const handleLogin = (email, password) => {
+    localStorage.setItem(
+      "loggedInUser",
+      JSON.stringify({ role: "admin" })
+    );
+  } else {
+    const employee = userData?.find(
+      (e) => email === e.email && password === e.password
+    );
 
-    if (email === "admin@me.com" && password === "123") {
-      setUser("admin");
-      localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }))
+    if (employee) {
+      setUser("employee");
+      setLoggedInUserData(employee);
 
-    }
-    else if (authData) {
-      console.log(authData);
-      const employee = authData.employees.find((e) => email == e.email && password == e.password)
-      if (employee) {
-        setUser('employee')
-        setLoggedInUserData(employee)
-        localStorage.setItem(
-          "loggedInUser",
-          JSON.stringify({ role: "employee", data: employee })
-        )
-      }
-    }
-
-    else {
+      localStorage.setItem(
+        "loggedInUser",
+        JSON.stringify({
+          role: "employee",
+          data: employee,
+        })
+      );
+    } else {
       alert("Invalid Credentials");
     }
-  };
+  }
+};
 
 
 
@@ -70,6 +74,10 @@ const App = () => {
 
 
 
+  const currentUser = userData?.find(
+    (e) => (loggedInUserData?.email && e.email === loggedInUserData.email) || (loggedInUserData?.firstName && e.firstName === loggedInUserData.firstName)
+  ) || loggedInUserData;
+
   return (
     <div>
       {!user ? (
@@ -77,7 +85,7 @@ const App = () => {
       ) : user === "admin" ? (
         <AdminDashboard changeUser={setUser}/>
       ) : user === "employee" ? (
-        <EmployeeDashboard changeUser={setUser} data={loggedInUserData} />
+        <EmployeeDashboard changeUser={setUser} data={currentUser} />
       ) : null}
     </div>
   );

@@ -7,7 +7,7 @@ const employees = [
     password: "123",
 
     taskStats: {
-      active: 2,
+      active: 1,
       newTask: 1,
       completed: 1,
       failed: 1
@@ -15,7 +15,7 @@ const employees = [
 
     tasks: [
       {
-        active: true,
+        active: false,
         newTask: true,
         completed: false,
         failed: false,
@@ -72,7 +72,7 @@ const employees = [
 
     tasks: [
       {
-        active: true,
+        active: false,
         newTask: true,
         completed: false,
         failed: false,
@@ -112,7 +112,7 @@ const employees = [
         category: "Design"
       },
       {
-        active: true,
+        active: false,
         newTask: true,
         completed: false,
         failed: false,
@@ -139,7 +139,7 @@ const employees = [
 
     tasks: [
       {
-        active: true,
+        active: false,
         newTask: true,
         completed: false,
         failed: false,
@@ -186,7 +186,7 @@ const employees = [
 
     tasks: [
       {
-        active: true,
+        active: false,
         newTask: true,
         completed: false,
         failed: false,
@@ -243,7 +243,7 @@ const employees = [
 
     tasks: [
       {
-        active: true,
+        active: false,
         newTask: true,
         completed: false,
         failed: false,
@@ -283,7 +283,7 @@ const employees = [
         category: "Testing"
       },
       {
-        active: true,
+        active: false,
         newTask: true,
         completed: false,
         failed: false,
@@ -308,8 +308,12 @@ const admin =  [
   ]
 
 export const setLocalStorage = () => {
-  localStorage.setItem("employees", JSON.stringify(employees));
-  localStorage.setItem("admin", JSON.stringify(admin));
+  if (!localStorage.getItem("employees")) {
+    localStorage.setItem("employees", JSON.stringify(employees));
+  }
+  if (!localStorage.getItem("admin")) {
+    localStorage.setItem("admin", JSON.stringify(admin));
+  }
 };
 
 export const getLocalStorage = () => {
